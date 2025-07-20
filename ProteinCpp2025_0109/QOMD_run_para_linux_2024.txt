@@ -1,0 +1,79 @@
+
+
+*************************
+*   run para            *
+*************************
+
+0         1         2         3         4         5         6         7         8         9         0         1         2         
+0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+
+RUN_PROCEDURE                |        24105       |                                       |  run 1vii
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+RUN_PROCEDURE                |        24115       |                                       |  run 1vii_rod
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+
+
+RUN_PROCEDURE                |        24103       |                                       |  
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+
+
+
+RUN_PROCEDURE                |        24105       |                                       |  run 1vii
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+
+RUN_PROCEDURE                |        24102       |                                       |  
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+RUN_PROCEDURE                |          101       |                                       |  
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+
+
+
+
+
+
+
+
+RUN_PROCEDURE                |        24107       |                                       |  run 2rrk
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+RUN_PROCEDURE                |        24106       |                                       |  run 4uzx
+
+END                          |                                                            |  this is the end of parameters for one subprogram, 
+                                                                                          |  parameters below this flag would be ignored.
+
+
+
+

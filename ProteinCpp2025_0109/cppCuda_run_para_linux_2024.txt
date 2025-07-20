@@ -1,0 +1,76 @@
+
+
+*************************
+*   run para            *
+*************************
+
+
+0         1         2         3         4         5         6         7         8         9         0         1         2         
+0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+PROTEIN_NAME        |        |1VII                                              | not used, preserve, do not modify
+
+GPU_DEVICE_NAME     |        |970                                               | not used, preserve, do not modify
+
+DATA_DIR            |        |/home/m1/qomd2022/1VII/                           | not used, preserve, do not modify
+
+RUN_START           |        |1|                                                | 1 = START or 0 = CONTINUE, used, do not modify
+
+PARA_ELEC           |        |2|                                                | 1 = use qomd(old fixed para), 2 = use hhmo(new adjustable para), add 2024-10-70
+
+PARA_FREQ           |        |2|                                                | 1 = use qomd(old fixed para), 2 = use hhmo(new adjustable para), add 2024-10-70
+
+RUN_MODE            |        |2|                                                | 1 = SER or 2 = PAR or 3 = CUDA, could be modified, 1 or 2
+
+RUN_METHOD          |        |2|                                                | 1 = COUVDW or 2 = ELCCOL or 3 = only_4_osci, could be modified, 1 or 2 or 3
+
+RUN_GPU             |        |1|                                                | 1 = one gpu or 2 = two gpus, not used, preserve, do not modify
+
+RUN_ROUNDS          |        |1000                |                             | form 100 to 100000, used, could be modified
+
+WRITE_FREQ          |        |1                   |                             | write frequence, for compute temperature, could be modified
+
+WRITE_MEDIUM_FREQ   |        |10000               |                             | write medium data files and pdb file, to protect run data when power off for servers, not used, preserve, do not modify
+
+BOND_DEVI_RATIO     |        |0.06                |                             | double bond_deviation_ratio = 0.0435;           qomd run para, used, do not modify
+
+ANGLE_DEVI_RATIO    |        |0.06                |                             | double angle_deviation_ratio = 0.0435;          qomd run para, used, do not modify
+
+PLANE_DEVI_RATIO    |        |0.06                |                             | double plane_deviation_ratio = 0.0435;          qomd run para, used, do not modify
+
+DIHE_LIMIT_RATIO    |        |0.0435              |                             | double dihedral_ratio_LimitDeviation = 0.0435;  qomd run para, used, do not modify
+
+DIHE_FLATTOP_RATIO  |        |0.9                 |                             | double dihedral_ratio_FlattopDeviation = 0.9;   qomd run para, used, do not modify
+
+BOND_ENFORCE_RATIO  |        |0.3                 |                             | double bond_normal_inner_regressive_enforce_ration  = 0.3;   qomd run para, used, could be modified
+
+ANGLE_ENFORCE_RATIO |        |0.3                 |                             | double angle_normal_inner_regressive_enforce_ration = 0.3;   qomd run para, used, could be modified
+
+PLANE_ENFORCE_RATIO |        |0.3                 |                             | double plane_normal_inner_regressive_enforce_ration = 0.3;   qomd run para, used, could be modified
+
+BOND_DEVIMODI_RATE  |        |0.1                 |                             | double bond_limit_deviation_modify_rate  = 0.5;   qomd run para, used, could be modified
+
+ANGLE_DEVIMODI_RATE |        |0.1                 |                             | double angle_limit_deviation_modify_rate = 0.5;   qomd run para, used, could be modified
+
+PLANE_DEVIMODI_RATE |        |0.1                 |                             | double plane_limit_deviation_modify_rate = 0.5;   qomd run para, used, could be modified
+
+RATIO_ELCCOL_R_WALL |        |0.7                 |                             | 0.7,  qomd run para, used, do not modify
+
+RATIO_ELCCOL_COL1   |        |0.2                 |                             | 0.5,  qomd run para, used, could be modified
+
+RATIO_ELCCOL_COL2   |        |0.1                 |                             | 0.3,  qomd run para, used, could be modified
+
+RATIO_ELCCOL_ELC    |        |0.02                |                             | 0.05, qomd run para, used, could be modified
+
+END                 |                                                           | end of read file flag, used, do not modify
+
+
+
+NOTE : when RUN_START = 0, must copy file  "InputData/cppCuda_couvdw.txt"   to "MediumData/medium_couvdw.txt"    and 
+NOTE :                                     "InputData/cppCuda_harmonic.txt" to "MediumData/medium_harmonic.txt"
+
+
+old para 
+BOND_DEVI_RATIO     |         0.0435                                            | double bond_deviation_ratio = 0.0435;           qomd run para, used, do not modify
+ANGLE_DEVI_RATIO    |         0.0435                                            | double angle_deviation_ratio = 0.0435;          qomd run para, used, do not modify
+PLANE_DEVI_RATIO    |         0.0435                                            | double plane_deviation_ratio = 0.0435;          qomd run para, used, do not modify

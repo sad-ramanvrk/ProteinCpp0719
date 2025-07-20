@@ -1,0 +1,998 @@
+
+
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                          A PROGRAMMING GUIDE                                 │ │
+│ │                                                                              │ │
+│ │                           for the COURSE of                                  │ │
+│ │                                                                              │ │
+│ │                      ARTIFICIAL NEURAL NETWORKS 2024                         │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                              MENG Zhaohui                                    │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                            HOHAI UNIVERSITY                                  │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                              2024-09-01                                      │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ │                                                                              │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │ CHAPTER 1                                                                    │ │
+│ │ How to setup a ubuntu system                                                 │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+We will install the linux system of UBUNTU20.04 on a computer without any operating 
+system.
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 1.1                                                                              │
+│ Download iso file                                                                │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+"ubuntu-20.04.2.0-desktop-amd64.iso"
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 1.2                                                                              │
+│ Make a startup disk(USB disk)                                                    │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+(1) windows : if you have a windows system, write iso file into a USB disk(>8GB) 
+using Rufus(a software).
+
+select : dd, MBR, UEFI
+
+(2) ubuntu : if you have a linux(ubuntu) system, write iso file into a USB disk(>8GB) 
+using "Make Startup Disk" (a software in ubuntu system).
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 1.3                                                                              │
+│ Install ubuntu                                                                   │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+Power on a computer and press <del> and entry the BIOS interface, select USB boot, 
+and then reboot.
+
+Install ubuntu20.04, select NORMAL,
+
+
+define : computername, username, password
+
+
+after done, then reboot
+
+
+
+
+
+
+
+
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │ CHAPTER 2                                                                    │ │
+│ │ Install softwares                                                            │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.1                                                                              │
+│ Install gcc  (necessary)                                                         │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+Open Terminal, then run command ($ is the prompt of the shell):
+
+$ sudo apt-get install build-essential
+
+after done, run command to verify:
+
+$ gcc --version
+
+gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.2                                                                              │
+│ Install cmake  (necessary)                                                       │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+$ sudo apt-get install cmake
+
+after done, run command to verify:
+
+$ cmake --version
+
+cmake version 3.16.3
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.3                                                                              │
+│ Install opencv  (optional)                                                       │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+command line :
+
+$ sudo apt-get install libopencv-dev
+
+after done, then command line :
+
+$ dpkg -L libopencv-dev
+
+result below :
+
+/.
+/usr
+/usr/bin
+/usr/bin/opencv_annotation
+/usr/bin/opencv_interactive-calibration
+/usr/bin/opencv_version
+/usr/bin/opencv_visualisation
+/usr/bin/opencv_waldboost_detector
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/cmake
+/usr/lib/x86_64-linux-gnu/cmake/opencv4
+/usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig-version.cmake
+/usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake
+/usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVModules-release.cmake
+/usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVModules.cmake
+/usr/lib/x86_64-linux-gnu/pkgconfig
+/usr/lib/x86_64-linux-gnu/pkgconfig/opencv4.pc
+/usr/share
+/usr/share/doc
+/usr/share/doc/libopencv-dev
+/usr/share/doc/libopencv-dev/copyright
+/usr/share/licenses
+/usr/share/licenses/opencv4
+/usr/share/licenses/opencv4/SoftFloat-COPYING.txt
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libopencv-dev
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/opencv_createsamples.1.gz
+/usr/share/man/man1/opencv_haartraining.1.gz
+/usr/share/man/man1/opencv_performance.1.gz
+/usr/share/man/man1/opencv_traincascade.1.gz
+/usr/share/doc/libopencv-dev/changelog.Debian.gz
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.4                                                                              │
+│ Install synaptic (optional)                                                      │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+(1)
+open software : "Ubuntu Software"(a software on the desktop), find "synaptic", and 
+install.
+
+(2)
+command line : (deprecated)
+$ sudo apt-get install synaptic
+after done, there is an icon of synaptic would be on the desktop
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.5                                                                              │
+│ Install cuda  (optional)                                                         │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+command line :
+
+$ sudo apt-get install nvidia-cuda-toolkit
+
+after done, then command line :
+
+$ nvcc --version
+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Sun_Jul_28_19:07:16_PDT_2019
+Cuda compilation tools, release 10.1, V10.1.243
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.6                                                                              │
+│ Install nvidia drivers (optional)                                                │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+install nvidia-driver-390 / or 430 or 435 or 465(recomemended the latest version), 
+by Synaptic
+
+(1) open Synaptic,
+
+(2) press <Reload> button on the top menu bar,
+
+(3) press <Search> button on the top menu bar, saerch "nvidia-driver-390", or other 
+keywords like this,
+
+(4) select and mark,
+
+(5) press <Apply> button on the top menu bar, to download and install.
+
+
+after done, then command line :
+
+hhcv@hhcv:~$ nvidia-smi
+
+result below :
+
+
+Fri May 29 09:49:57 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 390.132                Driver Version: 390.132                   |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GT 710      Off  | 00000000:01:00.0 N/A |                  N/A |
+| 40%   38C    P0    N/A /  N/A |    404MiB /  1994MiB |     N/A      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0                    Not Supported                                       |
++-----------------------------------------------------------------------------+
+
+
+Wed Sep  1 22:16:42 2021       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:06:00.0  On |                  N/A |
+| 38%   52C    P0    54W / 200W |    317MiB /  4043MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A       956      G   /usr/lib/xorg/Xorg                 63MiB |
+|    0   N/A  N/A      1456      G   /usr/lib/xorg/Xorg                138MiB |
+|    0   N/A  N/A      1663      G   /usr/bin/gnome-shell               71MiB |
+|    0   N/A  N/A      3038      G   ...AAAAAAAAA= --shared-files       28MiB |
++-----------------------------------------------------------------------------+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.7                                                                              │
+│ Install VScode (necessary / or other code editor)                                │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+(1)
+download deb pakage : code_1.44.2-1587059832_amd64.deb
+
+run command:
+
+$ sudo dpkg -i ~/Downloads/code_1.44.2-1587059832_amd64.deb
+
+after done, there is an icon of vscode would be on the desktop
+
+(2)
+open software : "Ubuntu Software"(a software on the desktop), find "vscode", and 
+install.
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.8                                                                              │
+│ Install latex (optional)                                                         │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+$ sudo apt-get install texlive-full     
+
+$ sudo apt-get install texmaker
+
+after done, there is a texmaker icon would be on the desktop
+
+or run in command line ($ is a prompt for command):
+
+$ texmaker
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.9                                                                              │
+│ Install emacs (optional)                                                         │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+$sudo apt-get install emacs
+
+after done, there are two emacs icons(terminal & GUI) would be on the desktop
+
+or run in command line ($ is a prompt for command):
+
+$ emacs
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 2.10                                                                             │
+│ Install ffmpeg (optional)                                                        │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+$sudo apt-get install ffmpeg
+
+after done, run command:
+
+$ ffplay ~/meng/AI2019/camera_all_in_one_cuda_1.avi            
+                              ## ffplay video-file-name(path & filename)
+
+
+
+
+
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │ CHAPTER 3                                                                    │ │
+│ │ A test for using opencv (optional)                                           │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+This chapter show a simple example, to explain how to use ubuntu to edit and compile 
+and link and run a C program.
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.1                                                                              │
+│ Code file                                                                        │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+code file is a file of c++ program.
+
+code file and makefile are both in the directory of ~/meng/AI2019/
+
+file name : AIcourse2019.cpp
+file directory : ~/meng/AI2019/
+
+
+
+*******************************
+* start of code file (only a test)
+*******************************
+
+/**
+* 2019-08-04
+*/
+
+#include <iostream>
+#include <string>
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <opencv2/opencv.hpp>
+
+using namespace std;
+using namespace cv;
+
+///////////
+// main  //
+///////////
+
+int main()
+{
+
+  printf("hello !\n");
+
+  Mat img = imread("wannan.jpg");
+
+  imshow("image", img);
+
+  waitKey();
+
+
+
+  cv::VideoCapture capture_file1("camera_all_in_one_cuda_1.avi"); 
+
+  cv::Mat src_matFrame1;
+
+  cv::namedWindow("ORIGINAL1");
+
+  bool read_valid_frame1 = true;
+
+  while(1)
+    {
+
+      read_valid_frame1 = capture_file1.read(src_matFrame1);
+
+      if (!read_valid_frame1) break;
+
+      imshow("""ORIGINAL1", src_matFrame1);
+
+      char c = cvWaitKey(20);
+      if (c == 27) break;
+    }
+
+
+
+  cv::VideoCapture capture_file2("201809261329_003477AA.MP4"); 
+
+  cv::Mat src_matFrame2;
+
+  cv::namedWindow("ORIGINAL2");
+
+  bool read_valid_frame2 = true;
+
+  while(1)
+    {
+
+      read_valid_frame2 = capture_file2.read(src_matFrame2);
+
+      if (!read_valid_frame2) break;
+
+      imshow("""ORIGINAL2", src_matFrame2);
+
+      char c = cvWaitKey(20);
+      if (c == 27) break;
+    }
+
+  
+  return 0;
+  
+}
+
+*******************************
+* end of code file (only a test)
+*******************************
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.2                                                                              │
+│ Make file                                                                        │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+make file is a file of commands of compile and link, etc.
+
+code file and makefile are both in the directory of ~/meng/AI2019/
+
+file name : makefile
+file directory : ~/meng/AI2019/
+
+
+
+
+*******************************
+* start of make file (only a test)
+*******************************
+
+
+INCLUDE=$(shell pkg-config opencv --cflags)
+## get string --> -I/usr/include/opencv
+
+INCLUDE2=-I/usr/include/opencv2
+
+LIB=$(shell pkg-config opencv --libs)
+## get string -->  -lopencv_shape -lopencv_stitching -lopencv_superres -lopencv_videostab 
+-lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_datasets 
+-lopencv_dpm -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hdf 
+-lopencv_line_descriptor -lopencv_optflow -lopencv_video -lopencv_plot -lopencv_reg 
+-lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping 
+-lopencv_rgbd -lopencv_viz -lopencv_surface_matching -lopencv_text -lopencv_ximgproc 
+-lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect 
+-lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs 
+-lopencv_photo -lopencv_imgproc -lopencv_core
+
+
+OBJECTS=AIcourse2019.o
+SOURCE=AIcourse2019.cpp
+
+BIN=AIcourse2019
+
+
+#$(BIN) : $(OBJECTS)
+#	g++ -o $(BIN) $(OBJECTS) $(INCLUDE) $(INCLUDE2)
+
+$(BIN) : $(OBJECTS)
+	g++ -o $(BIN) $(OBJECTS) $(INCLUDE) $(INCLUDE2) $(LIB)
+
+
+$(OBJECTS) : $(SOURCE)
+	g++ -c $(SOURCE)
+
+
+
+*******************************
+* end of make file (only a test)
+*******************************
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.3                                                                              │
+│ Make                                                                             │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+command line :
+
+make
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.4                                                                              │
+│ List file in current directory                                                   │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+command line :
+
+ll
+
+result below :
+
+m1@hhcv:~/meng/AI2019$ ll
+total 109628
+drwxr-xr-x 2 m1 m1      4096 8月   5 21:27  ./
+drwxr-xr-x 3 m1 m1      4096 8月   4 20:52  ../
+-rw-r--r-- 1 m1 m1 104857600 9月  26  2018  201809261329_003477AA.MP4           ## video file
+-rwxr-xr-x 1 m1 m1     59000 8月   5 15:17  AIcourse2019*                       ## run file : after make
+-rw-rw-r-- 1 m1 m1      1201 8月   5 15:17  AIcourse2019.cpp                    ## source file
+-rw-r--r-- 1 m1 m1    121536 8月   5 15:17  AIcourse2019.o                      ## object file : after make
+-rw-r--r-- 1 m1 m1   7071388 1月  30  2015  camera_all_in_one_cuda_1.avi        ## video file
+-rw-r--r-- 1 m1 m1      1142 8月   5 14:40  makefile                            ## make file 
+-rw-rw-r-- 1 m1 m1     99356 8月   5 14:48  wannan.jpg                          ## picture file
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.5                                                                              │
+│ Run                                                                              │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+command line :
+
+~/meng/AI2019/AIcourse2019
+
+result : show picture, show video file, show video file.
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 3.6                                                                              │
+│ why use shell command in makefile                                                │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+command line:
+
+pkg-config opencv --cflags
+
+result :
+
+-I/usr/include/opencv
+
+that is, sentence in makefile, INCLUDE=$(shell pkg-config opencv --cflags),
+shell command could get string "-I/usr/include/opencv", then assign to varible INCLUDE.
+
+
+
+command line:
+
+pkg-config opencv --libs
+
+result :
+
+-lopencv_shape -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco 
+-lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_datasets -lopencv_dpm 
+-lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hdf -lopencv_line_descriptor 
+-lopencv_optflow -lopencv_video -lopencv_plot -lopencv_reg -lopencv_saliency 
+-lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_rgbd 
+-lopencv_viz -lopencv_surface_matching -lopencv_text -lopencv_ximgproc -lopencv_calib3d 
+-lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml 
+-lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_photo 
+-lopencv_imgproc -lopencv_core
+
+
+
+that is, sentence in makefile, LIB=$(shell pkg-config opencv --libs),
+shell command could also get string "-lopencv_shape -lopencv_stitching -lopencv_superres ...", 
+then assign to varible LIB.
+
+
+
+
+
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │ CHAPTER 4                                                                    │ │
+│ │ DVNN2024 : an example neural networks                                        │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+DVNN2024 is a collection of functions for an example neural networks with a protein simulator. 
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 4.1                                                                              │
+│ Main dir                                                                         │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+/home/m1/ProteinCpp2024
+
+or other directory you enjoy. this main dir can be settled by yourself.
+
+sub-dirs and files in this main directory : /home/m1/ProteinCpp2024
+
+drwxrwxr-x  7 m1 m1   4096 8月  31 00:24 ./
+drwxr-xr-x 37 m1 m1   4096 8月  30 23:57 ../
+-rwxrwxrwx  1 m1 m1   2836 10月 10  2023 cppCuda_run_para_linux_2024.txt*
+drwxrwxr-x  2 m1 m1   4096 8月  31 00:01 doc/
+drwxrwxr-x  2 m1 m1   4096 8月  31 00:05 InputData/
+drwxrwxr-x  2 m1 m1   4096 8月  31 00:24 obj/
+drwxrwxr-x  2 m1 m1   4096 8月  31 00:26 OutputData/
+-rwxrwxr-x  1 m1 m1 640800 8月  31 00:24 qomdProtein2024*
+-rwxrwxrwx  1 m1 m1   1504 8月  30 01:02 QOMD_run_para_linux_2024.txt*
+drwxrwxr-x  2 m1 m1   4096 8月  31 00:03 src/
+
+
+
+###############################
+# ProteinCpp2024              #
+###############################
+# all simulator dvnn files    #
+# open files                  #
+###############################
+#####################################################################################################################
+# new 2024                                                                                                          #
+# /home/m1/ProteinCpp2024/                                                                                          #
+#                        /qomdProtein2024                         : create by makefile                              #
+#                        /QOMD_run_para_linux_2024.txt            : run para by copy & revise by user               #
+#                        /cppCuda_run_para_linux_2024.txt         : run para by copy & revise by user               #
+#                        /doc/                                                                                      #
+#                            /Script81_dvnn_guide.txt             : readme file                                     #
+#                        /src/                                                                                      #
+#                            /aBase.h                             : run code by copy & revise by user               #
+#                            /aDir.h                              : run code by copy & revise by user               #
+#                            /aDvnn.h                             : run code by copy & revise by user               #
+#                            /aFuncListSim.h                      : run code by copy & revise by user               #
+#                            /qomdProtein2024.cpp                 : run code by copy & revise by user               #
+#                            /dvnnFunc.cpp                        : run code by copy & revise by user               #
+#                        /obj/                                                                                      #
+#                            /libQomd.a                           : run lib  by copy & do not revise                #
+#                            /makefile                            : makefile by copy & revise by user               #
+#                            /qomdProtein2024.o                   : create by makefile                              #
+#                            /dvnnFunc.o                          : create by makefile                              #
+#                        /InputData/                                                                                #
+#                                  /proteinBag_1VII_linux.byte    : run data by copy & do not revise                #
+#                        /OutputData/                                                                               #
+#####################################################################################################################
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ 4.2                                                                              │
+│ Steps                                                                            │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+(1) create sub dirs and copy files
+sub directories (doc/, src/, obj/, InputData/, OutputData/) of the main directory, these names must be preserved
+
+
+(2) modify aDir.h
+you can modify this main directory (your dir) in the header file : aDir.h
+
+constexpr char* DIR_HOME_QOMD_PROTEIN = (char*)"/home/m1/ProteinCpp2024";
+constexpr char* DIR_DICTIONARY        = (char*)"/home/m1/ProteinCpp2024/dict";
+
+
+(3) modify makefile
+and in the makefile : makefile 
+
+DIR_MAIN = /home/m1/ProteinCpp2024/
+
+
+(4) make 
+
+go to subdir
+m1@hhcv:~/ProteinCpp2024$ cd obj
+
+run make 
+m1@hhcv:~/ProteinCpp2024/obj$ make
+
+after run make, execute file qomdProtein2024 be created.
+
+
+(5) configure para files 
+
+you can modify these two files 
+
+cppCuda_run_para_linux_2024.txt
+and 
+QOMD_run_para_linux_2024.txt
+
+(6) run
+
+go to main dir
+m1@hhcv:~/ProteinCpp2024/obj$ cd ..
+
+run
+m1@hhcv:~/ProteinCpp2024$ ./qomdProtein2024
+
+you will see output on console like these:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+STEP : set & init base para
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+STEP : read base data from a text file <QOMD_run_para_linux_2024.txt>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+date: 2024/08/30   
+time: 24:25:13   
+successful open input file < /home/m1/ProteinCpp2024/QOMD_run_para_linux_2024.txt >
+RUN_PROCEDURE                      24102 
+read END! 
+successfully close input file < /home/m1/ProteinCpp2024/QOMD_run_para_linux_2024.txt >
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+STEP : open output file : <test_output_2024.txt>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TEST INFO write to file :   /home/m1/ProteinCpp2024/OutputData/test_output_2024.txt---
+successful open output file < /home/m1/ProteinCpp2024/OutputData/test_output_2024.txt >
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+STEP : get start time
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TEST PROCEDURE 24102 : only a test : basePara->para_RUN_PROCEDURE == 24102
+================================================================================================================
+PROCEDURE_STEP : proteinBag_1VII get from byte file <proteinBag_1VII_linux.byte>
+================================================================================================================
+successful open output file  < /home/m1/ProteinCpp2024/InputData/proteinBag_1VII_linux.byte >
+successfully close  < /home/m1/ProteinCpp2024/InputData/proteinBag_1VII_linux.byte >
+proteinBag : PROTEIN_NAME                      1viiA00000      
+proteinBag : GPU_DEVICE_NAME                   NO_GPU_DEVICE      
+proteinBag : qomd_PROTEIN_NAME                       
+proteinBag : qomd_GPU_DEVICE_NAME                    
+proteinBag : qomd_DATA_DIR                           
+proteinBag : qomd_RUN_START                             0    
+proteinBag : qomd_RUN_MODE                              0    
+proteinBag : qomd_RUN_GPU                               0    
+proteinBag : qomd_RUN_ROUNDS                                      0    
+proteinBag : qomd_WRITE_FREQ                                      0    
+proteinBag : qomd_WRITE_MEDIUM_FREQ                               0    
+proteinBag : qomd_BOND_DEVI_RATIO                    0.000000000000 
+proteinBag : qomd_ANGLE_DEVI_RATIO                   0.000000000000 
+proteinBag : qomd_PLANE_DEVI_RATIO                   0.000000000000 
+proteinBag : qomd_DIHE_LIMIT_RATIO                   0.000000000000 
+proteinBag : qomd_DIHE_FLATTOP_RATIO                 0.000000000000 
+proteinBag : VertexList->maxItem                        1230    
+proteinBag : proteinBag->HarmonicList->maxItem                  200    
+proteinBag : proteinBag->VertexList  ->maxItem                 1230    
+proteinBag : proteinBag->BondList    ->maxItem                 1192    
+proteinBag : proteinBag->AngleList   ->maxItem                 1788    
+proteinBag : proteinBag->DihedralList->maxItem                 2384    
+proteinBag : proteinBag->PlaneList   ->maxItem                  596    
+proteinBag : proteinBag->CouVdwList  ->maxItem               177310    
+proteinBag : proteinBag->ElcColList  ->maxItem               177310    
+proteinBag : proteinBag->HarmonicList->actItem                  160    
+proteinBag : proteinBag->VertexList  ->actItem                  596    
+proteinBag : proteinBag->BondList    ->actItem                  602    
+proteinBag : proteinBag->AngleList   ->actItem                 1091    
+proteinBag : proteinBag->DihedralList->actItem                 1588    
+proteinBag : proteinBag->PlaneList   ->actItem                  120    
+proteinBag : proteinBag->CouVdwList  ->actItem               174054    
+proteinBag : proteinBag->ElcColList  ->actItem               174054    
+proteinBag : CouVdwConnectMatrix->maxRow              596    
+proteinBag : CouVdwConnectMatrix->maxCol              596    
+proteinBag : CouVdwConnectMatrix->maxItem          355216    
+proteinBag : CouVdwConnectMatrix->actRow              596    
+proteinBag : CouVdwConnectMatrix->actCol              596    
+proteinBag : CouVdwConnectMatrix->actItem          355216    
+proteinBag : CouVdwConnectMatrix->maxItem          355216    
+proteinBag : CouVdwConnectMatrix->actItem          355216    
+proteinBag : ElcColConnectMatrix->maxRow              596    
+proteinBag : ElcColConnectMatrix->maxCol              596    
+proteinBag : ElcColConnectMatrix->maxItem          355216    
+proteinBag : ElcColConnectMatrix->actRow              596    
+proteinBag : ElcColConnectMatrix->actCol              596    
+proteinBag : ElcColConnectMatrix->actItem          355216    
+proteinBag : ElcColConnectMatrix->maxItem          355216    
+proteinBag : ElcColConnectMatrix->actItem          355216    
+================================================================================================================
+PROCEDURE_STEP : get qomdRunPara
+================================================================================================================
+
+
+
+(7) show protein by Jmol
+
+output file : dvnn_vertexList_pdb_1.txt and dvnn_vertexList_pdb_2.txt
+
+rename .txt to .pdb, you can use Jmol to show the protein.
+
+Jmol is a JAVA software. 
+
+
+
+
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │ CHAPTER 5                                                                    │ │
+│ │ Architecture of Protein2024                                                  │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                                                       //
+//       Architecture of Protein2024                                                                                                                     //
+//                                                                                                                                                       //
+//                                                                                                                                                       //
+//                                                                                                                                                       //
+//                                       ┌────────────────────────────┐                                                                                  //
+//                                       │ static protein             │                                                                                  //
+//                                       │ x-y-z coordinates of atoms │························································                          //
+//                                       │ (1VII, from .gpdb file)    │                                                       ·                          //
+//                                       └────────────┬───────────────┘                                                       ·                          //
+//                                                    │                                                                       ·                          //
+//                                                    │↓                                                                      ·                          //
+//                                                    │                                                                       ·                          //
+//    ┌──────────────────────────┐        ┌───────────┴─────────────┐        ┌─────────────────────────┐        ┌────────────────────────────┐           //
+//    │ QOMD PARA                │    →   │ QOMD SIMULATOR          │    →   │ QOMD DVNN               │   ←→   │ static protein             │           //
+//    │ initial parameters       ├────────┤ a protein simulator     ├────────┤ an observer/viewer      ├────────┤ x-y-z coordinates of atoms │           //
+//    │ QOMD_DICT_OCTA.byte      │        │ output snapshoot per fs │        │ a neural networks       │        │ (1VII, from .gpdb file)    │           //
+//    │ QOMD_DICT_HEXA_STAT.byte │        └───────────┬─────────────┘        └───────────┬─────────────┘        └─────────────┬──────────────┘           //
+//    └──────────────────────────┘                    │                                  │                                    │                          //
+//                                                    │↑                                 │↓                                  ↓│                          //
+//                                                    │                                  └─────────────────┬──────────────────┘                          //
+//                                        ┌───────────┴─────────────┐                                      │                                             //
+//                                        │ QOMD REGULATOR          │                ←                    ↓│                                             //
+//                                        │ a learning machine      ├──────────────────────────────────────┘                                             //
+//                                        │ for parameters of QOMD  │                                                                                    //
+//                                        └─────────────────────────┘                                                                                    //
+//                                                                                                                                                       //
+//                                                                                                                                                       //
+//       QOMD : quantitative oscillator molecular dynamics                                                                                               //
+//       DVNN : dynamic valued neural networks                                                                                                           //
+//                                                                                                                                                       //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//0         1         2         3         4         5         6         7         //
+//01234567890123456789012345678901234567890123456789012345678901234567890123456789//
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//  monospace font                                                                //
+//  ┌───────────┴──────────┐                                                      //
+//  │                      │                                                      //
+//  ┤           ┼          ├                                                      //
+//  │                      │                                                      //
+//  └───────────┬──────────┘                                                      //
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//  monospace font                                                                //
+//                                                                                //
+//  ← ↑ → ↓ ↖ ↗ ↘ ↙ ↰ ↱ ↲ ↳ ↴ ↵                                                   //
+//                                                                                //
+//  ·  -                                                                          //
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
