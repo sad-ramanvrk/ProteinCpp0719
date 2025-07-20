@@ -1,3 +1,16 @@
+# ========================================================================================================================
+# QOMD/CUDA 核心运行参数文件 (cppCuda_run_para_linux_2024.txt)
+# ========================================================================================================================
+#
+# 使用说明:
+# 1. 本文件包含了分子动力学模拟的核心控制参数和物理力场参数。
+# 2. 程序在启动时会读取这些参数来配置模拟环境。
+# 3. '#' 开头的行为注释行。
+# 4. 修改参数值时，请确保其在允许的范围内，并了解其可能对模拟结果（尤其是温度）造成的影响。
+#
+# ------------------------------------------------------------------------------------------------------------------------
+#       参数名               |      参数值        |                  注释与说明
+# ------------------------------------------------------------------------------------------------------------------------
 
 
 *************************
@@ -8,69 +21,75 @@
 0         1         2         3         4         5         6         7         8         9         0         1         2         
 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
 
-PROTEIN_NAME        |        |1VII                                              | not used, preserve, do not modify
+# --- 占位符与未使用参数 ---
+PROTEIN_NAME        |        |1VII                                              | # [未使用] 蛋白质名称，当前仅为占位符，保留。
+GPU_DEVICE_NAME     |        |970                                               | # [未使用] GPU设备名，当前仅为占位符，保留。
+DATA_DIR            |        |/home/m1/qomd2022/1VII/                           | # [未使用] 数据目录，当前仅为占位符，保留。
 
-GPU_DEVICE_NAME     |        |970                                               | not used, preserve, do not modify
+# --- 模拟运行控制 ---
+RUN_START           |        |1|                                                | # [选项] 模拟启动模式。1 = 从头开始 (START); 0 = 从断点继续 (CONTINUE)。(注: "继续"功能暂未完成)
+RUN_MODE            |        |2|                                                | # [选项] 计算模式。1 = 串行 (SER); 2 = 并行/多线程 (PAR)。(注: 3 = CUDA/GPU 功能暂未完成)
+RUN_METHOD          |        |2|                                                | # [选项] 非键相互作用计算方法。1 = COUVDW (旧方法，暂不推荐); 2 = ELCCOL (新方法，推荐); 3 = 仅计算键合力 (only_4_osci, 用于测试)。
+RUN_GPU             |        |1|                                                | # [未使用] GPU数量。1 = 单GPU; 2 = 双GPU。(注: 此功能暂未完成)
+RUN_ROUNDS          |        |1000                |                             | # [参数] 总模拟步数。可修改，范围建议 100 ~ 100000。
+WRITE_FREQ          |        |1                   |                             | # [参数] 状态输出频率。每隔多少步输出一次温度等评估值。可修改。
+WRITE_MEDIUM_FREQ   |        |10000               |                             | # [未使用] 中继文件写入频率。用于配合 RUN_START=0 实现断点续跑。 (注: 此功能暂未完成)
 
-DATA_DIR            |        |/home/m1/qomd2022/1VII/                           | not used, preserve, do not modify
+# --- 力场参数选择 ---
+PARA_ELEC           |        |2|                                                | # [选项] 电荷参数来源。1 = QOMD (旧的固定参数); 2 = HHMO (新的可调参数)。
+PARA_FREQ           |        |2|                                                | # [选项] 振动频率参数来源。1 = QOMD (旧的固定参数); 2 = HHMO (新的可调参数)。
 
-RUN_START           |        |1|                                                | 1 = START or 0 = CONTINUE, used, do not modify
+# --- 键合力参数 (Bonded Force Parameters) ---
+# --- 1. 振子最大偏移比例 (影响振动范围和系统温度) ---
+BOND_DEVI_RATIO     |        |0.06                |                             | # [参数] BOND(键长)振子最大偏移比例。此值与平衡键长共同决定振动的上下限。可小范围修改，影响温度。
+ANGLE_DEVI_RATIO    |        |0.06                |                             | # [参数] ANGLE(键角)振子最大偏移比例。可小范围修改，影响温度。
+PLANE_DEVI_RATIO    |        |0.06                |                             | # [参数] PLANE(平面)振子最大偏移比例。可小范围修改，影响温度。
+#   详细解释: "最大偏移量" = "平衡值" * "最大偏移比例"。例如，平衡键长1.0Å，比例0.2，则最大偏移为0.2Å，键长范围为[0.8, 1.2]。
+#             还有一个内置的"最小偏移量" = "最大偏移量" * 0.5，定义了一个更小的振动区间。
 
-PARA_ELEC           |        |2|                                                | 1 = use qomd(old fixed para), 2 = use hhmo(new adjustable para), add 2024-10-70
+# --- 2. 二面角振子参数 (Dihedral) ---
+DIHE_LIMIT_RATIO    |        |0.0435              |                             | # [参数] DIHEDRAL(二面角)振子“谷底”偏移比例。建议暂时不修改。
+DIHE_FLATTOP_RATIO  |        |0.9                 |                             | # [参数] DIHEDRAL(二面角)振子“峰顶”偏移比例。建议暂时不修改。
 
-PARA_FREQ           |        |2|                                                | 1 = use qomd(old fixed para), 2 = use hhmo(new adjustable para), add 2024-10-70
+# --- 3. 振子强制回位比例 (Enforce Ratio) ---
+BOND_ENFORCE_RATIO  |        |0.3                 |                             | # [参数] BOND振子强制回位比例。当振动超出“极限偏移量”时，此参数决定回拉力度。可小范围修改，影响温度。
+ANGLE_ENFORCE_RATIO |        |0.3                 |                             | # [参数] ANGLE振子强制回位比例。可小范围修改，影响温度。
+PLANE_ENFORCE_RATIO |        |0.3                 |                             | # [参数] PLANE振子强制回位比例。可小范围修改，影响温度。
+#   详细解释: 当振子能量过高使其偏移超过动态的“极限偏移量”时，系统会执行强制回位操作，回拉的幅度由“超出量”和此“回位比例”共同决定。
 
-RUN_MODE            |        |2|                                                | 1 = SER or 2 = PAR or 3 = CUDA, could be modified, 1 or 2
+# --- 4. 振子极限偏移量动态修改率 (Deviation Modify Rate) ---
+BOND_DEVIMODI_RATE  |        |0.1                 |                             | # [参数] BOND振子“极限偏移量”的动态调整速率。可小范围修改，影响温度。
+ANGLE_DEVIMODI_RATE |        |0.1                 |                             | # [参数] ANGLE振子“极限偏移量”的动态调整速率。可小范围修改，影响温度。
+PLANE_DEVIMODI_RATE |        |0.1                 |                             | # [参数] PLANE振子“极限偏移量”的动态调整速率。可小范围修改，影响温度。
+#   详细解释: “极限偏移量”是一个在[最小偏移量, 最大偏移量]区间内动态变化的量，代表振子当前所携带的能量。此参数控制着能量在振子间流转的速率，从而影响下一步的振动位移和系统温度。
 
-RUN_METHOD          |        |2|                                                | 1 = COUVDW or 2 = ELCCOL or 3 = only_4_osci, could be modified, 1 or 2 or 3
+# --- 非键力参数 (Non-bonded Force Parameters for ELCCOL method) ---
+RATIO_ELCCOL_R_WALL |        |0.7                 |                             | # [参数] 碰撞墙位置比例。决定了两个原子发生“硬碰撞”的距离。可修改，影响温度。
+#   详细解释: 非键作用分为碰撞力和电荷力。“接触位置”≈ 范德华半径之和。“碰撞墙位置”= "接触位置" * RATIO_ELCCOL_R_WALL。
 
-RUN_GPU             |        |1|                                                | 1 = one gpu or 2 = two gpus, not used, preserve, do not modify
+RATIO_ELCCOL_COL1   |        |0.2                 |                             | # [参数] 强碰撞力计算参数。当原子间距 < "碰撞墙位置" 时，此参数决定回弹力度。可修改，影响温度。
+RATIO_ELCCOL_COL2   |        |0.1                 |                             | # [参数] 弱碰撞力计算参数。当 "碰撞墙位置" < 间距 < "接触位置" 时，此参数决定回弹力度。可修改，影响温度。
+RATIO_ELCCOL_ELC    |        |0.02                |                             | # [参数] 电荷力计算参数。当间距 > "接触位置" 时，仅计算电荷力。此参数对折叠驱动力影响很大。可修改，影响温度。
 
-RUN_ROUNDS          |        |1000                |                             | form 100 to 100000, used, could be modified
-
-WRITE_FREQ          |        |1                   |                             | write frequence, for compute temperature, could be modified
-
-WRITE_MEDIUM_FREQ   |        |10000               |                             | write medium data files and pdb file, to protect run data when power off for servers, not used, preserve, do not modify
-
-BOND_DEVI_RATIO     |        |0.06                |                             | double bond_deviation_ratio = 0.0435;           qomd run para, used, do not modify
-
-ANGLE_DEVI_RATIO    |        |0.06                |                             | double angle_deviation_ratio = 0.0435;          qomd run para, used, do not modify
-
-PLANE_DEVI_RATIO    |        |0.06                |                             | double plane_deviation_ratio = 0.0435;          qomd run para, used, do not modify
-
-DIHE_LIMIT_RATIO    |        |0.0435              |                             | double dihedral_ratio_LimitDeviation = 0.0435;  qomd run para, used, do not modify
-
-DIHE_FLATTOP_RATIO  |        |0.9                 |                             | double dihedral_ratio_FlattopDeviation = 0.9;   qomd run para, used, do not modify
-
-BOND_ENFORCE_RATIO  |        |0.3                 |                             | double bond_normal_inner_regressive_enforce_ration  = 0.3;   qomd run para, used, could be modified
-
-ANGLE_ENFORCE_RATIO |        |0.3                 |                             | double angle_normal_inner_regressive_enforce_ration = 0.3;   qomd run para, used, could be modified
-
-PLANE_ENFORCE_RATIO |        |0.3                 |                             | double plane_normal_inner_regressive_enforce_ration = 0.3;   qomd run para, used, could be modified
-
-BOND_DEVIMODI_RATE  |        |0.1                 |                             | double bond_limit_deviation_modify_rate  = 0.5;   qomd run para, used, could be modified
-
-ANGLE_DEVIMODI_RATE |        |0.1                 |                             | double angle_limit_deviation_modify_rate = 0.5;   qomd run para, used, could be modified
-
-PLANE_DEVIMODI_RATE |        |0.1                 |                             | double plane_limit_deviation_modify_rate = 0.5;   qomd run para, used, could be modified
-
-RATIO_ELCCOL_R_WALL |        |0.7                 |                             | 0.7,  qomd run para, used, do not modify
-
-RATIO_ELCCOL_COL1   |        |0.2                 |                             | 0.5,  qomd run para, used, could be modified
-
-RATIO_ELCCOL_COL2   |        |0.1                 |                             | 0.3,  qomd run para, used, could be modified
-
-RATIO_ELCCOL_ELC    |        |0.02                |                             | 0.05, qomd run para, used, could be modified
-
-END                 |                                                           | end of read file flag, used, do not modify
+# --- 文件结束标志 ---
+END                 |                                                           | # [固定标志] 文件读取结束符，请勿修改或删除。
 
 
+# ========================================================================================================================
+# 附注与历史参数 (本部分内容在END标志之后，程序不会读取)
+# ========================================================================================================================
 
-NOTE : when RUN_START = 0, must copy file  "InputData/cppCuda_couvdw.txt"   to "MediumData/medium_couvdw.txt"    and 
+# --- 操作提示 (NOTE) ---
+# 这是一个给开发者的手动操作提示，与"断点续跑"(RUN_START = 0)功能相关。
+# 由于自动加载中继文件的功能尚未完成，当需要继续上一次中断的模拟时，
+# 可能需要手动将初始力场文件从 InputData 目录复制到 MediumData 目录。
+NOTE : when RUN_START = 0, must copy file  "InputData/cppCuda_couvdw.txt"   to "MediumData/medium_couvdw.txt"    and
 NOTE :                                     "InputData/cppCuda_harmonic.txt" to "MediumData/medium_harmonic.txt"
 
-
-old para 
+# --- 历史参数记录 (old para) ---
+# 这里记录了一些参数在开发过程中的旧数值，仅用于备忘和对比。
+# 如果新的参数导致模拟结果不佳，可以参考这些旧值。
+old para
 BOND_DEVI_RATIO     |         0.0435                                            | double bond_deviation_ratio = 0.0435;           qomd run para, used, do not modify
 ANGLE_DEVI_RATIO    |         0.0435                                            | double angle_deviation_ratio = 0.0435;          qomd run para, used, do not modify
 PLANE_DEVI_RATIO    |         0.0435                                            | double plane_deviation_ratio = 0.0435;          qomd run para, used, do not modify

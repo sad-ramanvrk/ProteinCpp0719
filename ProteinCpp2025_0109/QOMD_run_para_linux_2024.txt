@@ -1,79 +1,76 @@
-
+# ========================================================================================================================
+# QOMD 运行参数配置文件 (QOMD_run_para_linux_2024.txt)
+# ========================================================================================================================
+#
+# 使用说明:
+# 1. 本文件通过 "RUN_PROCEDURE" 参数来控制程序执行的具体流程。
+# 2. 程序会从上到下读取此文件，并使用它遇到的第一个未被注释的 "RUN_PROCEDURE" 块。
+# 3. 要运行特定的流程，请确保对应的 "RUN_PROCEDURE" 块是文件中第一个有效的块。
+#    您可以通过在行首添加 '#' 来注释掉其他不需要的块。
+# 4. 每一块配置以 "RUN_PROCEDURE" 开始，以 "END" 结束。
+#
+# ------------------------------------------------------------------------------------------------------------------------
+#       参数名         |          参数值        |                  说明
+# ------------------------------------------------------------------------------------------------------------------------
 
 *************************
-*   run para            *
+* run para            *
 *************************
 
-0         1         2         3         4         5         6         7         8         9         0         1         2         
+0         1         2         3         4         5         6         7         8         9         0         1         2
 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
 
+# --- 流程 24105: 运行蛋白质 "1VII" 的完整分子动力学模拟 ---
+# 1vii的PDB蛋白质数据，模拟运动
+# 触发 all_procedures_2024() 函数调用 procedure_24102()，并传入 "1VII" 的数据包文件名。
+# 这是执行一个完整模拟的标准流程。
+RUN_PROCEDURE                |        24105       |                                       |  运行 "1VII" 的模拟
 
-RUN_PROCEDURE                |        24105       |                                       |  run 1vii
+END                          |                                                            |  (块结束标志)
 
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
+# --- 流程 24115: 运行蛋白质 "1VII_rod" 的完整分子动力学模拟 ---
+# 1vii从长杆模型开始（长链状态），模拟折叠过程
+# 触发 all_procedures_2024() 函数调用 procedure_24102()，并传入 "1VII_rod" 的数据包文件名。
+RUN_PROCEDURE                |        24115       |                                       |  运行 "1VII_rod" 的模拟
 
+END                          |                                                            |  (块结束标志)
 
+# --- 流程 24103: 读取并检查轨迹文件 ---
+# 触发 all_procedures_2024() 函数调用 procedure_24103()。
+# 此流程会读取 "time_point.byte" 轨迹文件，并打印开头和结尾的几帧数据，用于快速验证轨迹是否生成正确。
+#RUN_PROCEDURE                |        24103       |                                       |  读取并检查轨迹文件
 
-RUN_PROCEDURE                |        24115       |                                       |  run 1vii_rod
+#END                          |                                                            |  (块结束标志)
 
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
+# --- 流程 24104: 计算 RMSD (均方根偏差) ---
+# 触发 all_procedures_2024() 函数调用 procedure_24104()。
+# 此流程会读取轨迹文件，并计算两个指定时间点（例如初始结构和末尾结构）之间的 RMSD 值，用于分析结构变化。
+#RUN_PROCEDURE                |        24104       |                                       |  计算 RMSD
 
+#END                          |                                                            |  (块结束标志)
 
+# --- 流程 24102: 通用模拟流程 (可能已弃用或用于测试) ---
+# 触发 all_procedures_2024() 函数调用 procedure_24102()，但不指定具体蛋白质。
+# 在当前代码中，这可能是一个通用的测试入口。
+#RUN_PROCEDURE                |        24102       |                                       |  通用模拟测试
 
+#END                          |                                                            |  (块结束标志)
 
+# --- 流程 101: 基础程序测试 ---
+# 触发 all_procedures_2024() 函数中的一个简单打印语句。
+# 用于最基本的测试，确认程序可以正常启动并读取参数。
+#RUN_PROCEDURE                |          101       |                                       |  基础连通性测试
 
-RUN_PROCEDURE                |        24103       |                                       |  
+#END                          |                                                            |  (块结束标志)
 
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
+# --- 流程 24107: 运行蛋白质 "2RRK" 的完整分子动力学模拟 ---
+# 触发 all_procedures_2024() 函数调用 procedure_24102()，并传入 "2RRK" 的数据包文件名。
+#RUN_PROCEDURE                |        24107       |                                       |  运行 "2RRK" 的模拟
 
+#END                          |                                                            |  (块结束标志)
 
+# --- 流程 24106: 运行蛋白质 "4UZX" 的完整分子动力学模拟 ---
+# 触发 all_procedures_2024() 函数调用 procedure_24102()，并传入 "4UZX" 的数据包文件名。
+#RUN_PROCEDURE                |        24106       |                                       |  运行 "4UZX" 的模拟
 
-
-
-
-RUN_PROCEDURE                |        24105       |                                       |  run 1vii
-
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
-
-
-
-
-RUN_PROCEDURE                |        24102       |                                       |  
-
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
-
-
-
-RUN_PROCEDURE                |          101       |                                       |  
-
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
-
-
-
-
-
-
-
-
-
-
-
-RUN_PROCEDURE                |        24107       |                                       |  run 2rrk
-
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
-
-RUN_PROCEDURE                |        24106       |                                       |  run 4uzx
-
-END                          |                                                            |  this is the end of parameters for one subprogram, 
-                                                                                          |  parameters below this flag would be ignored.
-
-
-
-
+#END                          |                                                            |  (块结束标志)
