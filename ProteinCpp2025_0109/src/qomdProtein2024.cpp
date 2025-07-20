@@ -439,7 +439,7 @@ void all_procedures_2024()
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // 步骤三: 打开输出文件 test_output_2024.txt
+    // 步骤三: 打开空白文件 test_output_2024.txt
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //================================================================================//
@@ -453,6 +453,7 @@ void all_procedures_2024()
 
     // 初始化并构建输出文件的完整路径。
     char fname_writerecord_test_output[FULL_NAME_MAX_LENGTH];
+    // 拼接文件路径：主目录 + 输出数据目录 + 文件名 "test_output_2024.txt"
     qomd_strmerge_3in1(fname_writerecord_test_output, DIR_HOME_QOMD_PROTEIN, DIR_OutputData, (char*)"test_output_2024.txt");
     printf("TEST INFO write to file :   %s---\n", fname_writerecord_test_output);
 
@@ -977,6 +978,7 @@ void procedure_24102(FILE* fptr_writerecord_test_output, char * proteinBag_file_
     qomd_shell3_copy_data_from_proteinBag_dvnnAngleList(dvnnAngleList, (void*) proteinBag_1VII);
     qomd_shell3_copy_data_from_proteinBag_dvnnDihedralList(dvnnDihedralList, (void*) proteinBag_1VII);
     qomd_shell3_copy_data_from_proteinBag_dvnnPlaneList(dvnnPlaneList, (void*) proteinBag_1VII);
+<<<<<<< HEAD
 
     // 将所有这些列表的初始状态写入文本文件和PDB文件，用于调试和验证。
 	/////////////////////////////////////////////////////////////////
@@ -987,13 +989,26 @@ void procedure_24102(FILE* fptr_writerecord_test_output, char * proteinBag_file_
 	qomd_strmerge_3in1(fname_writerecord_dvnn_all_list_init, DIR_HOME_QOMD_PROTEIN, DIR_OutputData, (char*)"dvnn_all_list_init.txt");
 
 	// write to test file
+=======
+
+    // 将所有这些列表的初始状态写入文本文件和PDB文件，用于调试和验证。
+    /////////////////////////////////////////////////////////////////
+    // 将所有列表写入测试文件
+    /////////////////////////////////////////////////////////////////
+    // 获取输出文件名
+    char fname_writerecord_dvnn_all_list_init[FULL_NAME_MAX_LENGTH];
+    // 拼接文件路径：主目录 + 输出数据目录 + 文件名 "dvnn_all_list_init.txt"
+    qomd_strmerge_3in1(fname_writerecord_dvnn_all_list_init, DIR_HOME_QOMD_PROTEIN, DIR_OutputData, (char*)"dvnn_all_list_init.txt");
+
+    // 写入测试文件
+>>>>>>> ad94389 (add: Data processing)
     dvnn_write_dvnnAllList_to_test_file(
-                                         (DvnnAtomicVertexList  *) dvnnVertexList                 ,
-                                         (DvnnForceBondList     *) dvnnBondList                   ,
-                                         (DvnnForceAngleList    *) dvnnAngleList                  ,
-                                         (DvnnForceDihedralList *) dvnnDihedralList               ,
-                                         (DvnnForcePlaneList    *) dvnnPlaneList                  ,
-	                                     (char                  *) fname_writerecord_dvnn_all_list_init );
+                                         (DvnnAtomicVertexList  *) dvnnVertexList,        // 原子顶点列表
+                                         (DvnnForceBondList     *) dvnnBondList,          // 键合力列表
+                                         (DvnnForceAngleList    *) dvnnAngleList,         // 角度力列表
+                                         (DvnnForceDihedralList *) dvnnDihedralList,      // 二面角力列表
+                                         (DvnnForcePlaneList    *) dvnnPlaneList,         // 平面力列表
+                                         (char                  *) fname_writerecord_dvnn_all_list_init ); // 输出文件名
 
 
 
@@ -1159,6 +1174,7 @@ void procedure_24102(FILE* fptr_writerecord_test_output, char * proteinBag_file_
 		}
 
        // 这部分被注释掉了，如果取消注释，它将在每一步都保存轨迹。
+<<<<<<< HEAD
        /*
        // 从proteinBag拷贝当前坐标到dvnnVertexList
        qomd_shell3_copy_current_from_proteinBag_dvnnVertexList(dvnnVertexList, proteinBag_1VII);
@@ -1169,6 +1185,33 @@ void procedure_24102(FILE* fptr_writerecord_test_output, char * proteinBag_file_
        dvnn_save_timePointList_listData_to_byte_file(fname_output_TIME_POINT_byte, timePointList);
        */
 
+=======
+
+       /*
+       // 从proteinBag拷贝当前坐标到dvnnVertexList
+       qomd_shell3_copy_current_from_proteinBag_dvnnVertexList(dvnnVertexList, proteinBag_1VII);
+       // 将dvnnVertexList的坐标拷贝到timePointList的当前时间戳位置
+       int timeStamp = round + 1;
+       dvnn_copy_vertexList_to_timePointList_by_timeStamp(timePointList, dvnnVertexList, timeStamp);
+       // 将当前时间戳的数据追加写入轨迹文件
+       dvnn_save_timePointList_listData_to_byte_file(fname_output_TIME_POINT_byte, timePointList);
+       */
+
+       // 按指定频率保存轨迹数据到time_point.byte文件
+       // 修改：取消注释并添加频率控制，避免每步都输出造成文件过大
+     if (round % qomdRunPara->WRITE_FREQ == 0)
+       {
+          // 从proteinBag拷贝当前坐标到dvnnVertexList
+          qomd_shell3_copy_current_from_proteinBag_dvnnVertexList(dvnnVertexList, proteinBag_1VII);
+          // 将dvnnVertexList的坐标拷贝到timePointList的当前时间戳位置
+           int timeStamp = round;  // 使用当前round作为时间戳
+          dvnn_copy_vertexList_to_timePointList_by_timeStamp(timePointList, dvnnVertexList, timeStamp);
+           // 将当前时间戳的数据追加写入轨迹文件
+          dvnn_save_timePointList_listData_to_byte_file(fname_output_TIME_POINT_byte, timePointList);
+           printf("轨迹数据已保存: 时间步 %d\n", timeStamp);
+       }
+
+>>>>>>> ad94389 (add: Data processing)
        // 在第100步时，输出一个快照，用于调试。
        if (round == 100)
        {
