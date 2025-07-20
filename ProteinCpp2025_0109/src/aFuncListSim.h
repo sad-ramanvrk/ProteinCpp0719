@@ -287,6 +287,10 @@ void qomd_shell3_femto_iterator_ser_use_CouVdw(void* proteinBag_vpic);
 // 并行执行CouVdw计算（飞秒迭代）
 void qomd_shell3_femto_iterator_per_use_CouVdw(void* proteinBag_vpic);
 
+void qomd_shell3_femto_iterator_ser_use_ElcCol(void* proteinBag_vpic);
+
+void qomd_shell3_femto_iterator_per_use_ElcCol(void* proteinBag_vpic);
+
 // 并行执行振荡器计算（飞秒迭代）
 void qomd_shell3_femto_iterator_per_use_4_osci(void* proteinBag_vpic);
 
@@ -326,3 +330,9 @@ double qomd_shell3_compute_rmsd_by_timePointList(
 
 // 输出蛋白质包的10个结果文件
 void qomd_shell3_write_proteinBag_output_10_files(void* proteinBag_vpic);
+
+// 从proteinBag拷贝最终的键、角、二面角、平面列表的当前数据。
+void qomd_shell3_copy_current_from_proteinBag_dvnnBondList(DvnnForceBondList*, void* );
+void qomd_shell3_copy_current_from_proteinBag_dvnnAngleList(DvnnForceAngleList*, void* );
+void qomd_shell3_copy_current_from_proteinBag_dvnnDihedralList(DvnnForceDihedralList*, void* );
+void qomd_shell3_copy_current_from_proteinBag_dvnnPlaneList(DvnnForcePlaneList*, void* );
