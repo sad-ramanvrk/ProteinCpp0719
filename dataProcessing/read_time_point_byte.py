@@ -358,12 +358,12 @@ def save_coordinates_to_pdb(coordinates, output_file, time_step=0):
         f.write("END\n")
 
 
-def main():
+if __name__ == "__main__":
     """主函数"""
     print("=== QOMD time_point.byte 文件读取工具 ===")
 
     # 默认文件路径
-    default_file = "../DataSet/procedure_24105_OutputData/time_point_linux.byte"
+    default_file = "/Users/fay/Code/0719/DataSet/1000_time_point_linux.byte"
 
     # 检查命令行参数
     if len(sys.argv) > 1:
@@ -378,7 +378,7 @@ def main():
 
     if header_info is None or time_points is None:
         print("读取文件失败")
-        return
+        exit(0)
 
     # 打印样本数据
     print_sample_data(header_info, time_points)
@@ -432,5 +432,5 @@ def main():
         print(f"  - PDB结构文件")
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
